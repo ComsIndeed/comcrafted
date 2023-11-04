@@ -1,0 +1,100 @@
+$grid-columns: 4;
+$grid-gutter: 1em;
+$shadow: rgba(0, 0, 0, 0.194);
+$overlay-color: rgba(0, 0, 0, 0.25);
+$overlay-active-opacity: 0.25;
+$card-hover-scale: 1.025;
+$card-active-scale: 0.95;
+
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+
+  .topbar {
+    height: 2em;
+    -webkit-box-shadow: 1px 1px 0.25em 2px $shadow;
+    -moz-box-shadow: 1px 1px 0.25em 2px $shadow;
+    box-shadow: 1px 1px 0.25em 2px $shadow;
+
+    #brand {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+
+      #icon {
+        height: 90%;
+        aspect-ratio: 1/1;
+        background-image: url("./Assets/icon.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      #name {
+        margin: 0;
+        font-size: 1.5em;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+#contents {
+  padding: 1em;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat($grid-columns, 1fr);
+  gap: $grid-gutter;
+}
+
+.card {
+  min-height: 10em;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  box-shadow: 1px 1px 0.25em 2px $shadow;
+  -webkit-box-shadow: 1px 1px 0.25em 2px $shadow;
+  -moz-box-shadow: 1px 1px 0.25em 2px $shadow;
+  transition: 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale($card-hover-scale);
+  }
+
+  &:active {
+    transform: scale($card-active-scale);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $overlay-color;
+    pointer-events: none;
+    z-index: 1;
+    transition: 0.1s ease-in-out;
+    opacity: 0;
+  }
+
+  &:active::before {
+    opacity: $overlay-active-opacity;
+  }
+
+  .name {
+    display: inline-block;
+  }
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
