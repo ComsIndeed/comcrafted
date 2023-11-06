@@ -1,0 +1,22 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html body {
+  margin: 0%;
+}
+html h1 {
+  margin: 0%;
+}
+
+.navBar {
+  width: 100vw;
+  min-height: 3em;
+  box-shadow: 0.15em 0.02em 0.25em 0.15em rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  margin: 1em;
+  padding: 1em;
+  box-shadow: 0.15em 0.02em 0.25em 0.15em rgba(0, 0, 0, 0.1);
+}/*# sourceMappingURL=main.css.map */
