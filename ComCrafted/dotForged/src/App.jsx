@@ -1,16 +1,10 @@
-import { BuilderElement, Panel } from './Components/ServerUI/Builder'
+import { ServerUI_Page } from "./Apps/ServerUI/ServerUI";
 import { useState } from "react";
 
 function App() {
   return (<>
   
-    <Panel>
-      <BuilderElement type="Stuff"/>
-      <BuilderElement type="Stuff"/>
-      <BuilderElement type="Stuff"/>
-      <BuilderElement type="Stuff"/>
-      <BuilderElement type="Stuff"/>
-    </Panel>
+    <ServerUI_Page />
 
   </>)
 }
