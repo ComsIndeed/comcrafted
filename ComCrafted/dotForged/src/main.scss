@@ -4,3 +4,23 @@ $shadow: 0.2em 0.2em 0.5em 0.2em rgba(0, 0, 0, 0.15);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+// ======
+
+.preview {
+  background-color: black;
+  color: white;
+  padding: 1em;
+  font-family: monospace;
+  font-size: large;
+}
+
+body {
+  margin: 0;
+  padding: 1em;
+  width: calc(100vw - 2em);
+
+  #root {
+    display: flex;
+    width: 100%;
+  }
+}

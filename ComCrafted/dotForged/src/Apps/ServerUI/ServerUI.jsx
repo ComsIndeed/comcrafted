@@ -1,4 +1,5 @@
-import { ModalFormPanel } from "./Components/builder"
+import { Preview } from "./Components/preview";
+import { ModalFormPanel, elements } from "./Components/builder"
 
 let array = ["Item1", "Item2", "Item3"]
 
@@ -7,16 +8,13 @@ function output(input) {
     return toString(element)    
   });
 }
-
+      
 export function ServerUI_Page() {
   return (
     <>
     
     <ModalFormPanel />
-
-    <p>
-      {output(array)}
-    </p>
+    <Preview entry={elements} />
 
     </>
   )

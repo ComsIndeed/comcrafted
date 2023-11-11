@@ -1,28 +1,110 @@
 import { useState } from "react";
 
-const elements = ["title", "dropdown", "slider", "textField", "toggle"];
+// const elements = ["title", "dropdown", "slider", "textField", "toggle"];
 
 function Element(props) {
-  return <>
-  
-  <li>
-    <div>
-      <p>{props.entry.type}</p>
-      <button>Up</button>
-      <button>Down</button>
+  // props.index is the element's index in the array
+  // props.entry is the object its represented by in the array
+  // the value of props.entry.type is the element's type
+  // the properties and methods available for the element depends on its type value in the object in the array
 
-      {/* HERE, HOW DO I REMOVE THE ENTRY FROM THE ARRAY OF OBJECTS SO THAT IT REMOVES THE THING? */}
-      <button>Remove</button>
-    </div>
-  </li>
-  
-  </>;
+  const renderElementOptions = () => {
+    switch (props.entry.type) {
+      case "dropdown":
+        return (
+          <>
+            <input type="radio" />
+          </>
+        );
+
+      case "slider":
+        return <>
+          <input type="range" />
+        </>;
+
+      case "textField":
+        return <>
+          <input type="text" />
+        </>
+
+      case "toggle":
+        return <>
+          <input type="checkbox" />
+        </>
+
+      default:
+        return (
+          <>
+            <p>No Additional Control</p>
+          </>
+        );
+    }
+  };
+
+  return (
+    <>
+      <li>
+        <div className="elementControls">
+          <p>{props.entry.type}</p>
+          <button
+            onClick={() => {
+              props.moveUp(props.index);
+            }}
+          >
+            Up
+          </button>
+          <button
+            onClick={() => {
+              props.moveDown(props.index);
+            }}
+          >
+            Down
+          </button>
+          <button
+            onClick={() => {
+              props.removeElement(props.index);
+            }}
+          >
+            Remove entry number {props.index}{" "}
+          </button>
+
+          <div className="elementOptions">{renderElementOptions()}</div>
+        </div>
+      </li>
+    </>
+  );
 }
 
 export function ModalFormPanel() {
   const [elements, setElements] = useState([]);
   const newElement = (type) => {
     setElements([...elements, { type }]);
+  };
+  const removeElement = (index) => {
+    // Use filter to create a new array excluding the item at the specified index
+    const updatedElements = elements.filter((_, i) => i !== index);
+    setElements(updatedElements);
+  };
+  const moveUp = (index) => {
+    if (index > 0) {
+      const updatedElements = [...elements];
+      [updatedElements[index - 1], updatedElements[index]] = [
+        updatedElements[index],
+        updatedElements[index - 1],
+      ];
+      setElements(updatedElements);
+    }
+  };
+
+  const moveDown = (index) => {
+    if (index < elements.length - 1) {
+      const updatedElements = [...elements];
+      [updatedElements[index], updatedElements[index + 1]] = [
+        updatedElements[index + 1],
+        updatedElements[index],
+      ];
+      setElements(updatedElements);
+    }
   };
 
   return (
@@ -43,14 +125,46 @@ export function ModalFormPanel() {
           >
             Add Dropdown
           </button>
+          <button
+            onClick={() => {
+              newElement("slider");
+            }}
+          >
+            Add Slider
+          </button>
+          <button
+            onClick={() => {
+              newElement("textField");
+            }}
+          >
+            Add TextField
+          </button>
+          <button
+            onClick={() => {
+              newElement("toggle");
+            }}
+          >
+            Add Toggle
+          </button>
         </div>
 
         <ul className="elementList">
           {elements.map((entry, index) => {
-            return <Element key={index} entry={entry} />;
+            return (
+              <Element
+                key={index}
+                entry={entry}
+                index={index}
+                removeElement={removeElement}
+                moveUp={moveUp}
+                moveDown={moveDown}
+              />
+            );
           })}
         </ul>
       </div>
     </>
   );
 }
+
+export {elements};

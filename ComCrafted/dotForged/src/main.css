@@ -1,3 +1,21 @@
 * {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.preview {
+  background-color: black;
+  color: white;
+  padding: 1em;
+  font-family: monospace;
+  font-size: large;
+}
+
+body {
+  margin: 0;
+  padding: 1em;
+  width: calc(100vw - 2em);
+}
+body #root {
+  display: flex;
+  width: 100%;
 }/*# sourceMappingURL=main.css.map */
