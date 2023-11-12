@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Preview } from "./preview";
 
 // const elements = ["title", "dropdown", "slider", "textField", "toggle"];
 
@@ -75,10 +76,13 @@ function Element(props) {
   );
 }
 
+
 export function ModalFormPanel() {
+  const [elementID, setElementID] = useState(0)
   const [elements, setElements] = useState([]);
   const newElement = (type) => {
-    setElements([...elements, { type }]);
+    setElementID(elementID + 1)
+    setElements([...elements, { type, elementID }]);
   };
   const removeElement = (index) => {
     // Use filter to create a new array excluding the item at the specified index
@@ -163,8 +167,8 @@ export function ModalFormPanel() {
           })}
         </ul>
       </div>
+
+      <Preview entry={elements} />
     </>
   );
 }
-
-export {elements};
